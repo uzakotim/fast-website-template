@@ -3,8 +3,41 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-
+var cookieParser = require("cookie-parser");
+var bodyParser = require("body-parser");
+var mongoose = require("mongoose");
+const User = require("./models/User.js");
 var app = express();
+
+// Connecting and writing to DB
+mongoose
+    .connect("mongodb://localhost/template_app", {
+        useNewUrlParser: true,
+    })
+    .then(() => {
+        console.log("Connected to DB");
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+
+// Create a new entry in the Mongo DB
+// -------------------------------------------------------------------
+// const newUser = new User({ name: "John", email: "john@doe.com" });
+// newUser
+//     .save()
+//     .then(() => {
+//         console.log("Data inserted");
+//         User.find()
+//             .then((users) => {
+//                 console.log(users);
+//             })
+//             .catch((err) => {
+//                 console.log(err);
+//             });
+//     })
+//     .catch((err) => console.error(err));
+// -------------------------------------------------------------------
 
 // Require file system module
 var fs = require("fs");
